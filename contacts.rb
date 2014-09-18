@@ -1,64 +1,38 @@
 ## contacts.rb
-require 'pg'
+require 'active_record'
+require_relative 'setup'
+require_relative 'contact'
+#require 'pg'
 require 'pry'
 require 'pry-nav'
-require './contact'
-
-# Initiate a connection
-# puts "establishing connection ..."
-#     begin
-#       conn = PG.connect(
-#         dbname: 'd2igk2kn551t1h',
-#         port: 5432,
-#         user: 'vohambwcgejbmo',
-#         host: 'ec2-54-83-33-14.compute-1.amazonaws.com',
-#         password: 'vvD3NRNsRW_U2__8uERA8_EZP1'
-#       )
-#     rescue PG::ConnectionBad
-#       puts "Sorry there is something wrong with your credentials"
-#     end
-#     puts "Connected to database."
-
-#connect = Connection.new
-#test.conn
-
-## Insert new & save
-contact = Contact.new("Michael", "Robert", "mr@gmail.com")
-contact.save
+ 
+## AR: Insert new & save
+Contact.create(firstname: "Mike", lastname: "Bob", email: "aa@gmail.com")
 puts "contact.id = #{contact.id}"
 
-## Update
-contact.firstname = "K"
-contact.lastname = "V"
-contact.save
+## AR: Update by ID
+#Contact.find(31).update(firstname: "F-test", lastname: "L-test", email: "e@etest.com")
 
-## do I need a Contact.find???
 
-## find by id
-contacts = Contact.find(64)
-#puts contacts.inspect
-contacts.each do |c|
-  puts c
-end
+## AR: find all by lastname
+# c = Contact.where(lastname: 'L-test')
+# c.each do |item|
+#   puts item.id
+# end
 
-## find all by lastname
-contacts = Contact.find_all_by_lastname('Robert')
-contacts.each do |c|
-  puts c
-end
+## AR: find all by firstname
+# c = Contact.where(firstname: 'F-test')
+# c.each do |item|
+#   puts item.id
+# end
 
-## find all by firstname
-contacts = Contact.find_all_by_firstname('Michael')
-contacts.each do |c|
-  puts c
-end
+## AR: find all by email
+# c = Contact.where(email: 'e@etest.com')
+# c.each do |item|
+#   puts item.id
+#   puts item.firstname
+#   puts item.lastname
+# end
 
-## find all by email
-contacts = Contact.find_by_email('mr@gmail.com')
-contacts.each do |c|
-  puts c
-end
-
-## Delete an entry
-contact = Contact.new("Michael", "Robert", "mr@gmail.com")
-contact.destroy(13)
+## AR: Delete an entry
+# Contact.destroy(29)
